@@ -1,0 +1,98 @@
+Bài 1 : 
+a + b = n
+sao cho a là ước của b 
+Ví dụ ta cố định a
+ta có b % a = 0 mà b = n - a 
+=> (n - a) % a = 0
+=> (n%a) - (a%a) = 0
+=> n%a = 0
+khi a là ước của n
+=> đếm số ước của n
+N = 10
+(1,9)
+(2,8)
+(5,5)
+đếm số ước < N 
+----------------------------
+Bài 2 : 
+x * g(a1) - a1 
++
+x * g(a2) - a2 
+....
+x * g(an) - an 
+Gọi a1 + a2 + a3 + ... + an = sum 
+=> x*g(a1)+x*g(a2) +...+x*g(an) - sum >= m 
+=> x*(g(a1)+g(a2)+...+g(an)) - sum >= m 
+Gọi P = g(a1)+g(a2)+...+g(an)
+=> x * P - sum >= m 
+=> x >= (m + sum) / P
+x số nguyên 
+x = (m + sum) / P + ((m + sum)%P > 0)
+---------------------------
+Bài 3 :
+a + b > c && a + c > b && b + c > a 
+điều kiện tam giác ?
+
+a + b > c với a <= b <= c 
+i   j   k
+a[i] + a[j] > a[k]
+
+1   5 9
+i | j k 
+nếu j tang ? thì k như nào ?
+i      j             
+5 8 9 10 11 12 13 14 15 16 17
+
+dap an + (k - j - 1)
+------------------------------
+Bài 4 :
+Gọi dp[i][j] là giá trị lớn nhất có thể chọn khi chọn a[i][j]
+dp[1][j] = max(dp[2][j - 1], dp[3][j - 1]) + a[i][j]
+dp[2][j] = max(dp[1][j - 1], dp[3][j - 1]) + a[i][j]
+dp[3][j] = max(dp[1][j - 1], dp[2][j - 1]) + a[i][j]
+=> max(dp[1][n],dp[2][n],dp[3][n]) 
+
+dp[1][j] = max(dp[2][j - 2] + a[3][j - 1] + a[1][j], dp[3][j - 2] + a[2][j - 1] + a[1][j])
+
+//------------------------------
+khi các bạn so sánh 2 xâu thì như thế nào ?
+if (a == b) // lệnh có độ phức tạp là bao nhiêu ? O(min(size(a),size(b))
+string s;
+s[1] -> s[8] == s[4] -> s[11] // O(1) 
+q truy vấn (q <= 2*10^5)
+xâu dài 2*10^5 ???
+"MÃ HÓA" -> xâu đó thành 1 số riêng biệt
+xong rồi mình kiểm tra, 2 số đó = nhau thì 2 xâu going hau ?
+lưu ý, 2 xâu khác nhau thì phải nhận 2 số khác nhau
+=> rủi ro ? tỉ lệ đúng là bao nhiêu % ?
+
+abcd => (a*base^0 + b*base^1 + c*base^2 + d*base^3 + ... + s[p]*base^p) % mod 
+
+
+cin >> s;
+s = "!" + s;
+hash[0] = 0;
+base = 311;
+for (int i = 1; i < s.size(); i++){
+	hash[i] = (hash[i - 1]*base + s[i]) % mod;
+mod < 1e18 / base 
+gethash(x,y)
+	(hash[y] - hash[x - 1]*base^(y - x + 1))
+mod * mod < 1e18 
+
+1 2 3 4 5
+hash[0] = 0
+hash[1] = s[1] 
+hash[2] = s[1]*base + s[2]
+hash[3] = s[1]*base^2 + s[2]*base + s[3]
+hash[4] = s[1]*base^3 + s[2]*base^2 + s[3]*base + s[4]
+gethahs(3,4)
+
+s[1]*base^3 + s[2]*base^2 + s[3]*base + s[4]
+(s[1]*base + s[2]) * base^2 = s[1]*base^3 + s[2]*base^2 
+
+= s[3]*base + s[4]
+
+
+
+
