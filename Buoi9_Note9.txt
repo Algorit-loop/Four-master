@@ -1,0 +1,49 @@
+So hoc mot chut : 
+gcd(a*x,b*x) = gcd(a,b) * x 
+Tổ hợp : 
+Chọn ra k đứa trong n đứa : nCk 
+-------------------
+cho 1 <= n <= 10^6, 1 <= x <= n 
+Đếm số cặp a,b sao cho 1 <= a,b <= n
+và gcd(a,b) % x = 0 
+(**) gcd(a,b) = x 
+n = 10 , x = 3 => 36 
+(3,3) ; (3,6) ; (3,9)
+(6,3) ; (6,6)- ; (6,9)
+(9,3) ; (9,6) ; (9,9)-
+-> (3,3,3) ; (3,3,6) .. = 3^3 
+(a,b) : a phai boi cua 3 , b cung the 
+a => 3 so 
+b => 3 so 
+3 * 3 = 9 
+3 6 9
+3 6 9 
+
+dat d[x] la so day A sao cho gcd(A) = x 
+u = power(n/i,m,mod)
+gcd(A) % i = 0 
+i,2i,3i,....,ki voi ki <= n 
+// d[i] = u
+tinh i
+for (j = 2*i; j <= n; j += i)
+	u -= d[j] 
+d[i] = u 	
+
+------------Vector(Stack)----------
+cin >> n;
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    a[n + 1] = 0;
+    ll ans = 0;
+    vector <int> v = {0};
+    for (int i = 1; i <= n + 1; i++){
+        if (v.back() == a[i]) continue;
+        if (a[i] > v.back()) v.pb(a[i]);
+        else{
+            while (v.back() > a[i]){
+                ans++;
+                v.pop_back();
+            }
+            if (v.back() != a[i]) v.pb(a[i]);
+        }
+    }
+    cout << ans;
