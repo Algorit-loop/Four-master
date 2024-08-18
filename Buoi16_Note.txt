@@ -1,0 +1,59 @@
+max(pre[i] - pre[i - k])
+
+max(pre[r] - pre[l])
+
+
+map[4] = -1
+6
+1 4 -6 4 1 4
+1 5 -1 3 4 8
+r = 1 -> l = ?
+r = 2 -> l = ?
+r = 3 -> l = ?
+r = 4 -> l = 2 -> sum = 2
+r = 5 -> l = 1 -> sum = 4
+r = 6 -> l = [2,4] 
+r = 6 -> l = 2 , 4 ????
+pre[6] - min(pre[2-1],pre[4-1])
+map[4] = min(pre[2-1],pre[4-1]) if (a[i] == 4)
+
+r là mình for nên là ok ? 
+còn thằng l, ví dụ 1 r nhưng lại có nhiều l 
+thì lấy thằng là tối ưu ?
+công thức tổng là gì ?
+pre[r] - pre[l - 1]
+ok, nhưng thằng l nào thì mới được chọn ?
+mình phải gom những thằng l được chọn vào một tập, sau đó
+mình sẽ lấy min của giá trị tập đó ?
+vậy, làm sao để cho nó vào một tập ?
+một tập chứa bao nhiêu số là đủ ?
+-> chứa một số là đủ, vì chỉ cần lấy min
+-> nếu có xuất hiện them một l mới, thì hãy cập nhật min của thằng cũ và thằng mới để tối ưu hóa đáp án.
+-------------------------------
+đánh dấu if (a[i][j] == 1) thì đây là cục đá 
+còn không (a[i][j] == 1) thì đây là con đường
+
+dp[i][j] là số cách để đến được [i,j]
+thằng nào thì sẽ trực tiếp đến được [i,j] ?
+[i - 1][j] và [i,j - 1]
+
+số bước đến được [i,j] thì nó phải đi qua [i - 1,j] hoặc [i,j - 1] thì mới đến được [i,j] ?
+
+dp[i][j] là số cách để đến được [i,j]
+dp[i][j] = dp[i-1][j] + dp[i][j-1]
+a[][]
+0 1 0
+0 0 1
+0 0 0
+------
+dp[][]
+1 0 0
+1 1 0
+1 2 2
+------------------------
+bài tương tự
+cho n * m ô, mỗi ô có số điểm là a[i][j] (|a[i][j]| <= 1e9)
+hỏi ?
+Task 1 : đi từ ô 1 1 -> n n sao cho tổng số điểm là lớn nhất
+Task 2 : xuất từ một ô bất của hang 1, sau đó có thể đi xuống 3 ô liền kề (đi chéo trái, chéo phải hoặc xuống dưới) sao cho kết thúc tại một vị trí bất kì ở hang n sao cho có tổng lớn nhất.
+1 <= n , m <= 1000
