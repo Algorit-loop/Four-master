@@ -1,0 +1,34 @@
+f(x) = x/a + x/b - x/lcm(a,b)
+
+f(p) >= f(q) | p >= q 
+tuyen ting (ok)
+chat nhi phan
+
+f(mid) >= n | lay res, r = mid-1
+else l = mid + 1
+------------------------
+1001
+1001 
+5 7 11 13 17 19 23 25 29 31
+i*6 - 1 = u 
+i*6 + 1 = u + 2 
+if (n < 2) return false;
+if (n % 2 == 0) return n == 2;
+if (n % 3 == 0) return n == 3;
+for (ll i = 5; i * i <= n; i += 6)  if (n % i == 0 || n % (i + 2) == 0) return false;
+return true;
+----tich fibo----------
+f[a] * f[b] = x (a != b)
+x <= 10^15
+co bao nhieu so fibo sao cho cac so fibo <= 1e15
+60 so 
+60 * 60 * 100 / 1e8
+xu ly ? xu ly tran so 
+f[a] = 1e14
+f[b] = 1e14 
+
+f[a] * f[b] = x 
+f[a] = x / f[b]
+
+3 = 15 / 4
+x % f[a] == 0 && x % f[b] == 0 

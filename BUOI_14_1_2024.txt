@@ -1,0 +1,106 @@
+a???a
+a???b
+ababab
+
+a?????? .... ???? a 
+b????b
+b.....a
+a......b
+
+if (s[0] == '?') s[0] = a; 
+if (s[n-1] == '?') s[n - 1] = b;
+for (int i = 0; i < s.size(); i++){ // dien
+for (int i = 1; i < s.size(); i++){
+	if (s[i-1] == 'a' && s[i] == 'b') ans++;
+	 s_i-1 == 'b' && s_i-1 == 'a' ans--
+}
+------------------------------------
+dem snt tu sqrt(l) -> sqrt(r)
+
+pre = [0,1,2,2,3,3,7]
+
+10 -> 20
+
+snt tu sqrt(l) -> sqrt(r)
+-> pre[sqrt(r)] - pre[sqrt(l-1)]
+
+s = "113?132"
+d = 0 , so = 0
+so = 1 
+so = 11 
+so = 113 
+------------
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+bool compare(pair<ll,int> &x, pair<ll,int> &y){
+  if (x.first != y.first) return x.first > y.first;
+  return x.second < y.second;
+}
+void solve(){
+  int k;
+  cin >> k;
+  string s;
+  cin >> s;
+  s = s + "!";
+  vector <pair<ll,int>> v;
+  int d = 0 , so = 0;
+  // i - soluong - 1 -> ra duoc cai vi tri
+  // ? cua so hien taij
+  ll ans = 0;
+  for (int i = 0; i < s.size(); i++){
+      if (s[i] >= '0' && s[i] <= '9'){
+        d++;
+        so = so * 10 + (s[i] - 48);
+      }
+      else if (d > 0 && i - d - 1 >= 0){
+        v.push_back({so,i - d - 1});
+        so = 0;
+        d = 0;
+      } else {
+        if (i - d - 1 < 0){
+          ans += so;
+          so = 0;
+          d = 0;
+        }
+      }
+  }
+  sort(v.begin(),v.end(),compare);
+  for (int i = 0; i < k; i++) ans += v[i].first , s[v[i].second] = '+';
+  for (int i = k; i < v.size(); i++) ans -= v[i].first , s[v[i].second] = '-';
+  s.pop_back();
+  cout << ans << "\n";
+  cout << s << "\n";
+}
+int main() 
+{
+    int t; cin >> t;
+    while (t--){
+      solve();
+    }
+    return 0;
+}
+------------------
+a2*(b3+b4+b5)
+a3*(b3+b4+b5)
+a4*(b3+b4+b5)
+(a2+a3+a4)*(b3+b4+b5)
+(prea[i] - prea[j - 1])*(preb[v] - preb[u-1])
+
+taoj 1 vector PA chứa toàn bộ cặp giá trị của A
+1 <= i <= j <= n -> pre[j] - pre[i - 1]
+tạo vector PB ?? 
+
+với một giá X nào đó của thằng PA
+đếm có bao nhiêu giá trị Y sao cho X * Y <= M
+Y = M / X 
+
+hỏi trong mảng PB có bao nhiêu thằng <= Y 
+done ! 
+
+
+
+
+
+
+
