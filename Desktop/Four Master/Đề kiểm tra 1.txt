@@ -1,0 +1,10 @@
+Đề kiểm tra sắp tới : 
+- 2 (bài chặt nhị phân + 2 con trỏ)
+- 1 bài prefix sum (1D , 2D)
+- 1 Xử lý theo yêu cầu.
+- 1 Toán logic (gcd, lũy thừa...)
+- 1 bài dp/basic 
+- 1 bài HARD
+Thời gian : 12 tiếng
+Mức độ : 3 bài easy , 3 medium 
+Thể thức thi : IOI, cắn càng nhiều điểm càng tốt.

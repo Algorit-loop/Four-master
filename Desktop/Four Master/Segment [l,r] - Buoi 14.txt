@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int N = 2e5 + 1000;
+struct node{
+  ll left , right, op;
+  ll sum;
+  // xet [l,r]
+  // left = max(0,a[l] + a[l+1] + ... + a[x]) | x <= r
+  // right = max(0,a[r] + a[r-1] + a[r-2] +... +a[x]) | x >= l
+  // op = max(0,a[u]+a[u+1]+...+a[v]) | l <= u <= v <= r
+};
+node Tr[4*N];
+ll n , q, a[N];
+node merge(node a, node b){
+  node c;
+  c.left = max(a.left, a.sum + b.left);
+  c.right = max(b.right, b.sum + a.right);
+  c.sum = a.sum + b.sum;
+  c.op = max(max(a.op,b.op), a.right + b.left);
+  return c;
+}
+void built(int k, int l, int r){
+  if (l == r){
+    Tr[k].left = a[l];
+    Tr[k].right = a[l];
+    Tr[k].op = a[l];
+    Tr[k].sum = a[l];
+    return;
+  }
+  int mid = (l + r) >> 1;
+  built(2*k,l,mid);
+  built(2*k+1,mid+1,r);
+  Tr[k] = merge(Tr[2*k], Tr[2*k+1]);
+}
+node query(int k, int l, int r, int u, int v){
+  if (l > v || r < u){
+    node cc;
+    cc.left = -1e18;
+    cc.right = -1e18;
+    cc.op = -1e18;
+    cc.sum = 0;
+    return cc;
+  }
+  if (l >= u && r <= v) return Tr[k]; 
+  int mid = (l + r) / 2;
+  return merge(query(2*k,l,mid,u,v), query(2*k+1,mid+1,r,u,v));
+}
+int main()
+{
+    // n q
+    // l r -> a[u] + a[u + 1] + ... + a[v] l <= u <= v <= r
+    cin >> n >> q;
+    for (int i =1; i <= n; i++) cin >> a[i];
+    built(1,1,n);
+    while (q--){
+      int l , r ;
+      cin >> l >> r;
+      node u = query(1,1,n,l,r);
+      cout << u.op << "\n";
+    }
+    return 0;
+}

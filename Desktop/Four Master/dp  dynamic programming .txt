@@ -1,0 +1,64 @@
+dp : dynamic programming 
+
+Quy hoạch động : 
+- Định nghĩa 
+- Chia bài toán lớn thành các bài toán nhỏ
+- Xử lý các bài toán nhỏ sau đó tổng hợp thành bài toán lớn (Công thức, phân tích ...)
+
+Cơ bản : (thường chia làm 2 phần)
+- Phần neo
+- Phân công thức 
+
+* Ví dụ 
+Fibonacci : 
+- Phần neo ? -> f[1] = 1, f[2] = 1 
+- Phần công thức ? -> f[i] = f[i - 1] + f[i - 2] với mọi i > 2 
+
+Nhập một số nguyên n, tính fibonacci thứ n
+f[n] ?? -> f[n-1],f[n-2]
+-> f[n-3],f[n-4 -> f[1], f[2] 
+// code fibonacci
+f[1] = 1 , f[2] = 1 
+for (int i = 3; i <= n; i++) f[i] = f[i - 1] + f[i - 2];
+
+// Ếch đi chơi 
+- Gọi f[i] là số bước tối thiểu để nhảy đến i  (***)
+- từ thằng i có thể nhảy đến i + 1, i + 2, ... , i + k 
+- những thằng nào có thể nhảy tới i ? -> i-1, i-2, ... ,i-k
+
+f[i] số bước tối thiểu để nhảy đến i ? 
+u = {i-1, i-2, i-3, ... , i-k} (phụ thuộc)
+i phụ thuộc vào tập u 
+-> f[i] phụ thuộc f[u] với u = {i-1,i-2,...,i-k}
+
+f[u] + 1 = f[i] 
+muốn f[i] là nhỏ nhất thì f[u] phải là nhỏ nhất ?
+
+// (công thức)
+v = min(f[i-1],f[i-2],...,f[i-k]) 
+-> f[i] = v + 1 
+
+f[0] = 0 (ở nhà -> số bước là 0) (NEO)
+
+//-----------------------------------------------------
+Đếm số cách phân tích N thành tổng của 3 số 1,2,3
+n = 4
+1 + 1 + 1 + 1
+2 + 2
+3 + 1
+1 + 3 
+1 + 2 + 1
+2 + 1 + 1
+1 + 1 + 2 
+
+
+
+
+
+
+
+
+
+
+
+

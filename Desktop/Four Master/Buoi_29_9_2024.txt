@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define fi first
+#define se second
+using namespace std;
+const int N = 3e5 + 100;
+pair <int,int> a[N];
+int w,h,n;
+int pmax[N],pmin[N],smax[N],smin[N];
+int main(){
+  ios::sync_with_stdio(false); cin.tie(NULL);
+    cin >> w >> h;
+    cin >> n;
+    for (int i = 1; i <= n; i++){
+      cin >> a[i].fi >> a[i].se;
+    }
+    sort(a + 1,a + 1 + n);
+    pmax[0] = smax[n+1] = -1e9;
+    pmin[0] = smin[n+1] = 1e9;
+    for (int i = 1; i <= n; i++){
+      pmax[i] = max(pmax[i - 1],a[i].se);
+      pmin[i] = min(pmin[i - 1],a[i].se);
+    }
+    for (int i = n; i >= 1; i--){
+      smax[i] = max(smax[i + 1],a[i].se);
+      smin[i] = min(smin[i + 1],a[i].se);
+    }
+    int l = 0 , r = max(w,h), res = 1e9;
+    while (l <= r){
+      int k = (l + r) / 2;
+      bool check = false;
+      int j = 1;
+      for (int i = 1; i <= n; i++){
+        while (j <= n && a[j].fi - a[i].fi + 1 <= k){
+          j++;
+        }
+        int u = min(pmin[i-1],smin[j]) , v = max(pmax[i-1],smax[j]);
+        if (v - u + 1 <= k){
+          check = true;
+          break;
+        }
+      }
+      if (check){
+        res = k;
+        r = k - 1;
+      } else l = k + 1;
+    }
+    cout << res;
+    return 0;
+}
+---------------
+p = (a + b + c) / 2 
+
+sqrt(p*(p-a)*(p-b)*(p-c)) >= S
+
+p(p-2*a)(p-2*b)(p-2*c) >= S*S*16
+
+p*(p-2a) >= S*S*16 / ((p-2b)(p-2c))
+
+10 >= 100 / 9
+
+
+
+
+

@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+const ll base = 31;
+const ll mod = 1e9+ 7;
+const int N = 1e6 + 10;
+ll hs[N], pw[N];
+ll gethash(int x, int y){ // x <= y 
+  return (hs[y] - hs[x - 1] * pw[y - x + 1] + mod * mod) % mod;
+  ///     < mod -        < mod*mod
+}
+int main() 
+{
+    string s;
+    cin >> s;
+    s = "!" + s;
+    for (int i = 1; i < s.size(); i++){
+      hs[i] = (hs[i - 1]*base + s[i]) % mod;
+    }
+    pw[0] = 1;
+    for (int i = 1; i < s.size(); i++) pw[i] = pw[i - 1] * base % mod;
+    int q; cin >> q;
+    while (q--){
+      int x,y,u,v;
+      cin >> x >> y >> u >> v;
+      if (gethash(x,y) == gethash(u,v)){
+        cout << "Giong nhau\n";
+      } else cout << "Khac nhau\n";
+    }
+    return 0;
+}

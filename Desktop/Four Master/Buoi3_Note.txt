@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+// deque 
+int a[10203] , n,k;
+int main() 
+{
+  srand(time(NULL));
+    // cho day so nguyen a gom n phan tu va mot so nguyen k 
+    // hay in ra max cua cac doan sau 
+    // 1 -> k 
+    // 2 -> k + 1 
+    // 3 -> k + 3 
+    // .. 
+    // n - k + 1 -> n 
+    // 5 3 
+    // 1 3 2 6 8
+    // output : 3 6 8   
+    // gioi han : n , k <= 4*10^6
+    // O(nlogn) nhanh hon O(n) 
+    cin >> n >> k;
+    cout << n << " " << k << "\n";
+    for (int i = 1; i <= n; i++){
+      a[i] = rand() % 10 + 1;
+      cout << a[i] << " ";
+    }
+    // b[i] 
+    in ra max cua doan tu (i - b[i] + 1,i)
+    cout << "\n";
+    deque <int> dq;
+    dq.push_back(0);
+    for (int i = 1; i <= n; i++){
+      while (!dq.empty() && a[dq.back()] < a[i]) dq.pop_back();
+      // xet trong doan tu i - k + 1 -> i 
+      while (!dq.empty() && dq.front() < i - k + 1) dq.pop_front();
+      dq.push_back(i);
+      if (i >= k) cout << a[dq.front()] << " ";
+    }
+    // O(n) 
+    // segment tree 
+    built(1,1,n); // -> O(n log n)
+    for (int i = k; i <= n; i++){ // n 
+      cout << query(1,1,n,i - k + 1,i) << " "; // log(n)
+    }
+    return 0;
+}
